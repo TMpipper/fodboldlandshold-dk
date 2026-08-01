@@ -1,26 +1,136 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Primary: Deep navy */
+  --color-navy-50: #f0f4f8;
+  --color-navy-100: #d9e2ec;
+  --color-navy-200: #bcccdc;
+  --color-navy-300: #9fb3c8;
+  --color-navy-400: #627d98;
+  --color-navy-500: #2d3e50;
+  --color-navy-600: #243347;
+  --color-navy-700: #1c2a3a;
+  --color-navy-800: #1a2332;
+  --color-navy-900: #0f1923;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Accent: Pitch green */
+  --color-pitch-50: #e8f5e9;
+  --color-pitch-100: #c8e6c9;
+  --color-pitch-200: #a5d6a7;
+  --color-pitch-300: #81c784;
+  --color-pitch-400: #4caf50;
+  --color-pitch-500: #2e7d32;
+  --color-pitch-600: #1b5e20;
+
+  /* Neutral */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+
+  /* Gold accent */
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+
+  /* Fonts */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-slate-50);
+  color: var(--color-slate-800);
+  font-family: var(--font-sans);
+}
+
+/* ── Prose editorial ── */
+.prose-editorial {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--color-slate-700);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.prose-editorial h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-navy-800);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+.prose-editorial h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-navy-700);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-editorial p {
+  margin-bottom: 1.25rem;
+}
+.prose-editorial ul,
+.prose-editorial ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+.prose-editorial li {
+  margin-bottom: 0.5rem;
+}
+.prose-editorial a {
+  color: var(--color-pitch-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-editorial a:hover {
+  color: var(--color-pitch-600);
+}
+.prose-editorial strong {
+  font-weight: 600;
+  color: var(--color-slate-800);
+}
+.prose-editorial table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.prose-editorial pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.prose-editorial img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Utility classes ── */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section-rule {
+  width: 3rem;
+  height: 3px;
+  background: var(--color-pitch-500);
+  border: none;
+}
+
+/* ── Card hover ── */
+.card-hover {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Flag image container ── */
+.flag-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }

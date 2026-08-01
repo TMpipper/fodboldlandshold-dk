@@ -1,65 +1,87 @@
-import Image from "next/image";
+import { getPublishedTeams } from "@/lib/content/taxonomy";
+import { TeamCard } from "@/components/ui/TeamCard";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { webSiteSchema, breadcrumbSchema } from "@/lib/seo/schema";
+import { buildMetadata, homeMeta } from "@/lib/seo/metadata";
 
-export default function Home() {
+export const metadata = buildMetadata({
+  ...homeMeta(),
+  path: "/",
+});
+
+export default function HomePage() {
+  const teams = getPublishedTeams();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      <JsonLd data={webSiteSchema()} />
+      <JsonLd
+        data={breadcrumbSchema([{ name: "Forside", path: "/" }])}
+      />
+
+      {/* Hero */}
+      <section className="bg-navy-900 text-white py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 text-center">
+          <p className="eyebrow text-pitch-400 mb-4">
+            Din guide til verdens fodboldlandshold
+          </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+            Fodboldlandshold fra hele verden
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mx-auto max-w-2xl text-lg text-navy-200 leading-relaxed">
+            Udforsk spillertrupper, kampresultater, historie og statistik for de
+            mest populære fodboldlandshold. Alt samlet ét sted.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Team grid */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
+        <div className="text-center mb-12">
+          <hr className="section-rule mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-navy-800">
+            Alle fodboldlandshold
+          </h2>
+          <p className="mt-2 text-slate-500">
+            Vælg et landshold og læs alt om spillere, kampe og historie
+          </p>
         </div>
-      </main>
-    </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {teams.map((team) => (
+            <TeamCard key={team.slug} team={team} />
+          ))}
+        </div>
+      </section>
+
+      {/* Intro / SEO text */}
+      <section className="bg-white border-t border-slate-100">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-16">
+          <h2 className="text-2xl font-bold text-navy-800 mb-6">
+            Om Fodboldlandshold.dk
+          </h2>
+          <div className="prose-editorial">
+            <p>
+              Fodboldlandshold.dk er din komplette guide til verdens
+              fodboldlandshold. Vi dækker de mest populære landshold med
+              dybdegående artikler om spillertrupper, kampresultater, historiske
+              bedrifter og meget mere.
+            </p>
+            <p>
+              Uanset om du følger det danske landshold, de sydamerikanske
+              giganter eller de nye stjerner fra Afrika og Asien, finder du
+              opdateret information og analyser her. Vores mål er at give danske
+              fodboldfans den bedste og mest omfattende ressource om
+              fodboldlandshold fra hele verden.
+            </p>
+            <p>
+              Vi dækker i øjeblikket {teams.length} landshold fra alle
+              kontinenter og udvider løbende med flere hold, turneringsguides og
+              dybdegående analyser.
+            </p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
