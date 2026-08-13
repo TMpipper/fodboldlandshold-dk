@@ -1,3 +1,4 @@
+// @rebuilt: 2026-08-13
 export const SITE_URL = "https://fodboldlandshold.dk";
 export const SITE_NAME = "Fodboldlandshold.dk";
 export const SITE_DESCRIPTION =
