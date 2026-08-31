@@ -10,3 +10,4 @@ export const COMPANY = {
   address: "Hestehave 15, 6400 Sønderborg",
   country: "DK",
 };
+// rebuilt: 2026-08-31
