@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     await resend.emails.send({
       from: "Fodboldlandshold.dk <noreply@fodboldlandshold.dk>",
-      to: "info@mondomedia.dk",
+      to: "mail@elpriser.dk",
       replyTo: email,
       subject: `Kontaktformular: ${name}`,
       text: `Navn: ${name}\nE-mail: ${email}\n\nBesked:\n${message}`,
